@@ -1,0 +1,38 @@
+﻿@model VVAResto.ViewModels.ProfilViewModel
+
+@{
+    ViewBag.Title = "Connexion";
+}
+
+<h2>Connexion</h2>
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Profil.Identifiant
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.Profil.Identifiant)
+            @Html.TextBoxFor(m => m.Profil.Identifiant)
+            @Html.ValidationMessageFor(m => m.Profil.Identifiant)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Profil.Mdp)
+            @Html.PasswordFor(m => m.Profil.Mdp)
+            @Html.ValidationMessageFor(m => m.Profil.Mdp)
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+        <br />
+    }
+}
+
