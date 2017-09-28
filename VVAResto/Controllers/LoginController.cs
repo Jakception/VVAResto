@@ -13,7 +13,7 @@ namespace VVAResto.Controllers
     [AllowAnonymous]
     public class LoginController : Controller
     {
-        private IProfilService _ProfilService;
+        private IProfilService _profilService;
 
         public LoginController() : this(new ProfilService())
         {
@@ -22,7 +22,7 @@ namespace VVAResto.Controllers
 
         private LoginController(IProfilService profilIoc)
         {
-            _ProfilService = profilIoc;
+            _profilService = profilIoc;
         }
 
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace VVAResto.Controllers
             ProfilViewModel viewModel = new ProfilViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                viewModel.Profil = _ProfilService.ObtenirProfil(HttpContext.User.Identity.Name);
+                viewModel.Profil = _profilService.ObtenirProfil(HttpContext.User.Identity.Name);
             }
             return View(viewModel);
         }
@@ -40,7 +40,7 @@ namespace VVAResto.Controllers
         {
             if (ModelState.IsValid)
             {
-                Profil utilisateur = _ProfilService.Authentifier(viewModel.Profil.Identifiant, viewModel.Profil.Mdp);
+                Profil utilisateur = _profilService.Authentifier(viewModel.Profil.Identifiant, viewModel.Profil.Mdp);
                 if (utilisateur != null)
                 {
                     FormsAuthentication.SetAuthCookie(utilisateur.Identifiant, false);

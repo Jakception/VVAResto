@@ -79,8 +79,8 @@ namespace VVAResto.Services
         {
             string mdp = "";
 
-            List<string> listeLettre = new List<string> { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z" };
-            List<string> listeChiffre = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            string[] tabLettre = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z" };
+            string[] tabChiffre = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
             Random rand = new Random();
 
@@ -89,21 +89,18 @@ namespace VVAResto.Services
             int loc;
             int index;
 
-            int tailleListeLettre = listeLettre.Count;
-            int tailleListeChiffre = listeChiffre.Count;
-
             for (int i = 0; i < taille; i++)
             {
                 loc = rand.Next(0, 2);
                 if (loc == 0)
                 {
-                    index = rand.Next(0, tailleListeLettre);
-                    mdp = mdp + listeLettre[index];
+                    index = rand.Next(0, 25);
+                    mdp = mdp + tabLettre[index];
                 }
                 else
                 {
-                    index = rand.Next(0, tailleListeChiffre);
-                    mdp = mdp + listeChiffre[index];
+                    index = rand.Next(0, 9);
+                    mdp = mdp + tabChiffre[index];
                 }
             }
 

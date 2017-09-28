@@ -1,0 +1,49 @@
+﻿@model VVAResto.Models.Profil
+
+@{
+    ViewBag.Title = "Recherche des profils";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#NomProfil").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Gestion/AutoCompletion",
+                    type: "POST",
+                    dataType: "json",
+                    data: { saisie: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.NomProfil, value: item.NomProfil };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+<h2>Recherche de profils</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="form-group">
+                @Html.EditorFor(model => model.NomProfil, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+        </div>
+    </div>
+}
+
