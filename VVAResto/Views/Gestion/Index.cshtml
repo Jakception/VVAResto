@@ -31,19 +31,48 @@
     })
 </script>
 
+<script type="text/javascript">
+    function ErreurRecherche() {
+        $("#resultats").html("Une erreur s'est produite lors de la recherche, veuillez réessayer ...");
+    }
+</script>
+
 <h2>Recherche de profils</h2>
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()*@
+    @*<div class="form-inline">
+        <div class="form-group">
+            @Html.EditorFor(model => model.NomProfil, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+    </div>*@
+@*}*@
+
+@*@Html.Partial("AfficheRechercheProfil", Model.NomProfil)*@
+
+@using (Ajax.BeginForm("AfficheRechercheProfil", new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "resultats",
+    OnFailure = "ErreurRecherche",
+    LoadingElementId = "chargement"
+}))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
+    <div class="form-inline">
         <div class="form-group">
-            <div class="form-group">
-                @Html.EditorFor(model => model.NomProfil, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+            @Html.EditorFor(model => model.NomProfil, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+        <img id="chargement" src="~/Content~/Images/ajax-loader.gif" style="display: none" alt="Chargement en cours..." />
+        <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+    </div>
+    <br />
+
+    <div id="resultats">
+        @{Html.RenderAction("AfficheRechercheProfil", new { Profil = Model });
+        }
     </div>
 }
-

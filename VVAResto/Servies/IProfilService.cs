@@ -10,6 +10,7 @@ namespace VVAResto.Services
     public interface IProfilService : IDisposable
     {
         List<Profil> ObtientTousLesProfils();
+        List<Profil> ObtientLesProfilsParLeNom(string nom);
         string AjouterProfil(string nom, string prenom);
         string ValiderProfil(string identifiant, DateTime dateDebutSejour, DateTime dateDFinSejour, bool profilResto);
         Profil Authentifier(string identifiant, string motDePasse);

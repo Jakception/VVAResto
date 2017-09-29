@@ -17,15 +17,9 @@ namespace VVAResto.Services
             bdd = new BddContext();
         }
 
-        public List<Profil> ObtientTousLesProfils()
-        {
-            return bdd.Profils.ToList();
-        }
-
         public string AjouterProfil(string nom, string prenom)
         {
-            string motDePasseEncode = "123";
-                //EncodeMD5(GenerateMdp());
+            string motDePasseEncode = EncodeMD5(GenerateMdp());
             Profil utilisateur = new Profil {
                 Identifiant = GenerateIdentifiant(nom, prenom),
                 Mdp = motDePasseEncode,
@@ -53,6 +47,16 @@ namespace VVAResto.Services
             // string motDePasseEncode = EncodeMD5(motDePasse);
             // return bdd.Profils.FirstOrDefault(u => u.Identifiant == identifiant && u.Mdp == motDePasseEncode);
             return bdd.Profils.FirstOrDefault(u => u.Identifiant == identifiant && u.Mdp == motDePasse);
+        }
+
+        public List<Profil> ObtientTousLesProfils()
+        {
+            return bdd.Profils.ToList();
+        }
+
+        public List<Profil> ObtientLesProfilsParLeNom(string nom)
+        {
+            return bdd.Profils.Where(p => p.NomProfil == nom).ToList();
         }
 
         public Profil ObtenirProfil(string id)
