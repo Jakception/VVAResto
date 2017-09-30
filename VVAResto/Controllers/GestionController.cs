@@ -40,13 +40,14 @@ namespace VVAResto.Controllers
         public JsonResult AutoCompletion(string saisie)
         {
             //Note : you can bind same list from database
-            List<Profil> ObjList = _profilService.ObtientTousLesProfils();
+            List<Profil> ObjList = _profilService.ObtientTousLesProfilsVacanciers();
+            //List<Profil> ObjList = _profilService.ObtientTousLesProfils();
             //Searching records from list using LINQ query
             //var profilName = (from N in ObjList
             //                  where N.NomProfil.ToLower().StartsWith(saisie.ToLower())
             //                  select new { N.NomProfil });
             var profilName = (from N in ObjList
-                              where N.NomProfil.Contains(saisie.ToLower())
+                              where N.NomProfil.ToLower().Contains(saisie.ToLower())
                               select new { N.NomProfil });
             return Json(profilName, JsonRequestBehavior.AllowGet);
         }
@@ -60,10 +61,21 @@ namespace VVAResto.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(profil.NomProfil))
                     ListeDesProfils = _profilService.ObtientLesProfilsParLeNom(profil.NomProfil);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 
             }
             return PartialView(ListeDesProfils);
+        }
+
+        public ActionResult AjouterProfil()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AjouterProfil(Profil profil)
+        {
+            return View();
         }
 
         public ActionResult ModifierProfil(string identifiant)

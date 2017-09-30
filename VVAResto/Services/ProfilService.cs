@@ -37,21 +37,34 @@ namespace VVAResto.Services
             return utilisateur.Identifiant;
         }
 
-        public string ValiderProfil(string identifiant, DateTime dateDebutSejour, DateTime dateDFinSejour, bool profilResto)
+        public void ModifierProfil(string identifiant, DateTime dateDebutSejour, DateTime dateDFinSejour, bool profilResto)
         {
-            throw new NotImplementedException();
+            Profil profilTrouve = bdd.Profils.FirstOrDefault(profil => profil.Identifiant == identifiant);
+            if (profilTrouve != null)
+            {
+                profilTrouve.Identifiant = identifiant;
+                profilTrouve.DateDebutSejour = dateDebutSejour;
+                profilTrouve.DateFinSejour = dateDFinSejour;
+                profilTrouve.ProfilResto = profilResto;
+                bdd.SaveChanges();
+            }
         }
 
         public Profil Authentifier(string identifiant, string motDePasse)
         {
             // string motDePasseEncode = EncodeMD5(motDePasse);
             // return bdd.Profils.FirstOrDefault(u => u.Identifiant == identifiant && u.Mdp == motDePasseEncode);
-            return bdd.Profils.FirstOrDefault(u => u.Identifiant == identifiant && u.Mdp == motDePasse);
+            return bdd.Profils.FirstOrDefault(p => p.Identifiant == identifiant && p.Mdp == motDePasse);
         }
 
         public List<Profil> ObtientTousLesProfils()
         {
             return bdd.Profils.ToList();
+        }
+
+        public List<Profil> ObtientTousLesProfilsVacanciers()
+        {
+            return bdd.Profils.Where(p => p.TypeProfil == "Vacancier").ToList();
         }
 
         public List<Profil> ObtientLesProfilsParLeNom(string nom)

@@ -55,9 +55,9 @@
         </div>
         <img id="chargement" src="~/Content/Images/ajax-loader.gif" style="display: none" alt="Chargement en cours..." />
         <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+        @Html.ActionLink("Ajouter un nouveau profil", "AjouterProfil")
     </div>
     <br />
-
     <div id="resultats">
         @{Html.RenderAction("AfficheRechercheProfil", new { Profil = Model });
         }

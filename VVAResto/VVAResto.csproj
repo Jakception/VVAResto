@@ -136,8 +136,8 @@
     <Compile Include="Models\TypeMenu.cs" />
     <Compile Include="Models\TypePlat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servies\IProfilService.cs" />
-    <Compile Include="Servies\ProfilService.cs" />
+    <Compile Include="Services\IProfilService.cs" />
+    <Compile Include="Services\ProfilService.cs" />
     <Compile Include="ViewModels\ProfilViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +153,7 @@
     <Content Include="Views\Gestion\Index.cshtml" />
     <Content Include="Views\Gestion\AfficheRechercheProfil.cshtml" />
     <Content Include="Views\Gestion\ModifierProfil.cshtml" />
+    <Content Include="Views\Gestion\AjouterProfil.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
