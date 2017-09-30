@@ -33,7 +33,7 @@
                     <td>@profil.TypeProfil</td>
                     <td>@profil.ProfilResto.ToString()</td>
                     <td>@profil.DateFermeture.ToString()</td>
-                    <td>@Html.ActionLink("Modifier", "ModifierProfil", new { id = profil.Identifiant })</td>
+                    <td>@Html.ActionLink("Modifier", "ModifierProfil", new { identifiant = profil.Identifiant })</td>
                 </tr>
             }
         </table>
