@@ -39,19 +39,6 @@
 
 <h2>Recherche de profils</h2>
 
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()*@
-    @*<div class="form-inline">
-        <div class="form-group">
-            @Html.EditorFor(model => model.NomProfil, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
-    </div>*@
-@*}*@
-
-@*@Html.Partial("AfficheRechercheProfil", Model.NomProfil)*@
-
 @using (Ajax.BeginForm("AfficheRechercheProfil", new AjaxOptions
 {
     HttpMethod = "GET",

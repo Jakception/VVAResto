@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using VVAResto.Models;
@@ -50,11 +51,31 @@ namespace VVAResto.Controllers
             return Json(profilName, JsonRequestBehavior.AllowGet);
         }
 
- 
-        public ActionResult AfficheRechercheProfil(Profil profilRechercher)
+
+        public ActionResult AfficheRechercheProfil(Profil profil)
         {
-            List<Profil> ListeDesProfils = _profilService.ObtientLesProfilsParLeNom(profilRechercher.NomProfil);
+            List<Profil> ListeDesProfils = new List<Profil>();
+
+            if (profil != null)
+            {
+                if (!string.IsNullOrWhiteSpace(profil.NomProfil))
+                    ListeDesProfils = _profilService.ObtientLesProfilsParLeNom(profil.NomProfil);
+                    Thread.Sleep(1000);
+                
+            }
             return PartialView(ListeDesProfils);
+        }
+
+        public ActionResult ModifierProfil(string identifiant)
+        {
+            Profil profil = _profilService.ObtenirProfil(identifiant);
+            return View(profil);
+        }
+
+        [HttpPost]
+        public ActionResult ModifierProfil(Profil profil)
+        {
+            return View();
         }
     }
 }
