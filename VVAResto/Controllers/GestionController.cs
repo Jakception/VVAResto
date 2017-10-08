@@ -87,7 +87,8 @@ namespace VVAResto.Controllers
         [HttpPost]
         public ActionResult ModifierProfil(Profil profil)
         {
-            return View();
+            _profilService.ModifierProfil(profil.Identifiant, profil.DateDebutSejour, profil.DateFinSejour, profil.ProfilResto);
+            return View("Index");
         }
     }
 }

@@ -27,12 +27,12 @@
                     <td>@profil.Identifiant</td>
                     <td>@profil.NomProfil</td>
                     <td>@profil.PrenomProfil</td>
-                    <td>@profil.DateInscrip.ToString()</td>
-                    <td>@profil.DateDebutSejour.ToString()</td>
-                    <td>@profil.DateFinSejour.ToString()</td>
+                    <td>@profil.DateInscrip.ToString("dd/MM/yyyy")</td>
+                    <td>@profil.DateDebutSejour.ToString("dd/MM/yyyy")</td>
+                    <td>@profil.DateFinSejour.ToString("dd/MM/yyyy")</td>
                     <td>@profil.TypeProfil</td>
                     <td>@profil.ProfilResto.ToString()</td>
-                    <td>@profil.DateFermeture.ToString()</td>
+                    <td>@profil.DateFermeture.ToString("dd/MM/yyyy")</td>
                     <td>@Html.ActionLink("Modifier", "ModifierProfil", new { identifiant = profil.Identifiant })</td>
                 </tr>
             }

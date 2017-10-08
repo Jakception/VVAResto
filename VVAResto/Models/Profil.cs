@@ -23,9 +23,11 @@ namespace VVAResto.Models
         public string PrenomProfil { get; set; }
         [Display(Name ="Date d'inscription")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateInscrip { get; set; }
         [Display(Name ="Date de début du séjour")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateDebutSejour { get; set; }
         [Display(Name ="Date de fin du séjour")]
         public DateTime DateFinSejour { get; set; }
