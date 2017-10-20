@@ -9,33 +9,37 @@
     else
     {
         <table class="table">
-            <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Date Inscription</th>
-                <th>Date début séjour</th>
-                <th>Date fin séjour</th>
-                <th>Type profil</th>
-                <th>Profil resto</th>
-                <th>Date fermeture</th>
-                <th></th>
-            </tr>
-            @foreach (var profil in Model)
-            {
+            <thead>
                 <tr>
-                    <td>@profil.Identifiant</td>
-                    <td>@profil.NomProfil</td>
-                    <td>@profil.PrenomProfil</td>
-                    <td>@profil.DateInscrip.ToString("dd/MM/yyyy")</td>
-                    <td>@profil.DateDebutSejour.ToString("dd/MM/yyyy")</td>
-                    <td>@profil.DateFinSejour.ToString("dd/MM/yyyy")</td>
-                    <td>@profil.TypeProfil</td>
-                    <td>@profil.ProfilResto.ToString()</td>
-                    <td>@profil.DateFermeture.ToString("dd/MM/yyyy")</td>
-                    <td>@Html.ActionLink("Modifier", "ModifierProfil", new { identifiant = profil.Identifiant })</td>
+                    <th>Identifiant</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date Inscription</th>
+                    <th>Date début séjour</th>
+                    <th>Date fin séjour</th>
+                    <th>Type profil</th>
+                    <th>Profil resto</th>
+                    <th>Date fermeture</th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var profil in Model)
+                {
+                    <tr>
+                        <td>@profil.Identifiant</td>
+                        <td>@profil.NomProfil</td>
+                        <td>@profil.PrenomProfil</td>
+                        <td>@profil.DateInscrip.ToString("dd/MM/yyyy")</td>
+                        <td>@profil.DateDebutSejour.ToString("dd/MM/yyyy")</td>
+                        <td>@profil.DateFinSejour.ToString("dd/MM/yyyy")</td>
+                        <td>@profil.TypeProfil</td>
+                        <td>@profil.ProfilResto.ToString()</td>
+                        <td>@profil.DateFermeture.ToString("dd/MM/yyyy")</td>
+                        <td>@Html.ActionLink("Modifier", "ModifierProfil", new { identifiant = profil.Identifiant })</td>
+                    </tr>
+                }
+            </tbody>
         </table>
     }
 }

@@ -29,13 +29,6 @@ namespace VVAResto.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Index(Profil profil)
-        //{
-        //    List<Profil> ListeDesProfils = _profilService.ObtientLesProfilsParLeNom(profil.NomProfil);
-        //    return View(ListeDesProfils);
-        //}
-
         [HttpPost]
         public JsonResult AutoCompletion(string saisie)
         {
@@ -61,7 +54,7 @@ namespace VVAResto.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(profil.NomProfil))
                     ListeDesProfils = _profilService.ObtientLesProfilsParLeNom(profil.NomProfil);
-                    Thread.Sleep(500);
+                    //Thread.Sleep(100);
                 
             }
             return PartialView(ListeDesProfils);
