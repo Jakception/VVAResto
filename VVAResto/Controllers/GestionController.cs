@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -45,7 +46,6 @@ namespace VVAResto.Controllers
             return Json(profilName, JsonRequestBehavior.AllowGet);
         }
 
-
         public ActionResult AfficheRechercheProfil(Profil profil)
         {
             List<Profil> ListeDesProfils = new List<Profil>();
@@ -68,19 +68,61 @@ namespace VVAResto.Controllers
         [HttpPost]
         public ActionResult AjouterProfil(Profil profil)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _profilService.AjouterProfil(profil.NomProfil, profil.PrenomProfil, profil.DateDebutSejour, profil.DateFinSejour, profil.ProfilResto);
+                return View("Index");
+            }
+            return View(profil);            
         }
 
         public ActionResult ModifierProfil(string identifiant)
         {
+            if(string.IsNullOrWhiteSpace(identifiant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Profil profil = _profilService.ObtenirProfil(identifiant);
+            if(profil == null)
+            {
+                return HttpNotFound();
+            }
             return View(profil);
         }
 
         [HttpPost]
         public ActionResult ModifierProfil(Profil profil)
         {
-            _profilService.ModifierProfil(profil.Identifiant, profil.DateDebutSejour, profil.DateFinSejour, profil.ProfilResto);
+            if (ModelState.IsValid)
+            {
+                _profilService.ModifierProfil(profil.Identifiant, profil.DateDebutSejour, profil.DateFinSejour, profil.ProfilResto);
+                return View("Index");
+            }
+            return View(profil);
+        }
+
+        public ActionResult SupprimerProfil(string identifiant)
+        {
+            if (string.IsNullOrWhiteSpace(identifiant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Profil profil = _profilService.ObtenirProfil(identifiant);
+            if (profil == null)
+            {
+                return HttpNotFound();
+            }
+            return View(profil);
+        }
+
+        [HttpPost]
+        public ActionResult SupprimerProfil(Profil profil)
+        {
+            if (profil == null)
+            {
+                return HttpNotFound();
+            }
+            _profilService.SupprimerProfil(profil.Identifiant);
             return View("Index");
         }
     }

@@ -57,7 +57,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateDebutSejour, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateDebutSejour, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.DateDebutSejour, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextBoxFor(model => model.DateDebutSejour, "{0:dd/MM/yyyy}", new { @class = "date-picker form-control" })
                 @Html.ValidationMessageFor(model => model.DateDebutSejour, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +66,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateFinSejour, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateFinSejour, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.DateFinSejour, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextBoxFor(model => model.DateFinSejour, "{0:dd/MM/yyyy}", new { @class = "date-picker form-control" })
                 @Html.ValidationMessageFor(model => model.DateFinSejour, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,3 +93,32 @@
 <div>
     @Html.ActionLink("Retour à la recherche", "Index")
 </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+            $(function () {
+                $('#DateDebutSejour').datetimepicker({
+                    format: 'DD/MM/YYYY'
+                });
+            });
+            $(function () {
+                $('#DateFinSejour').datetimepicker({
+                    format: 'DD/MM/YYYY'
+                });
+            });
+</script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $.validator.addMethod('date',
+        function (value, element) {
+          $.culture = Globalize.culture("en-AU");
+          var date = Globalize.parseDate(value, "dd/MM/yyyy", "en-AU");
+          return this.optional(element) ||
+            !/Invalid|NaN/.test(new Date(date).toString());
+        });
+    });
+</script>

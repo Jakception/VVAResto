@@ -36,6 +36,6 @@ namespace VVAResto.Models
         [Display(Name ="Validation")]
         public bool ProfilResto { get; set; }
         [Display(Name ="Date de fermeture du profil")]
-        public DateTime DateFermeture { get; set; }
+        public DateTime? DateFermeture { get; set; }
     }
 }

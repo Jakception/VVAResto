@@ -17,7 +17,7 @@ namespace VVAResto.Services
             bdd = new BddContext();
         }
 
-        public string AjouterProfil(string nom, string prenom)
+        public string AjouterProfil(string nom, string prenom, DateTime dateDebutSejour, DateTime dateFinSejour, bool profilResto)
         {
             string motDePasseEncode = EncodeMD5(GenerateMdp());
             Profil utilisateur = new Profil {
@@ -26,11 +26,11 @@ namespace VVAResto.Services
                 NomProfil = nom,
                 PrenomProfil = prenom,
                 DateInscrip = DateTime.Now,
-                DateDebutSejour = DateTime.Now,
-                DateFinSejour = DateTime.Now,
+                DateDebutSejour = dateDebutSejour,
+                DateFinSejour = dateFinSejour,
                 TypeProfil = "Vacancier",
-                ProfilResto = false,
-                DateFermeture = DateTime.Now
+                ProfilResto = profilResto,
+                DateFermeture = null
             };
             bdd.Profils.Add(utilisateur);
             bdd.SaveChanges();
@@ -46,6 +46,16 @@ namespace VVAResto.Services
                 profilTrouve.DateDebutSejour = dateDebutSejour;
                 profilTrouve.DateFinSejour = dateDFinSejour;
                 profilTrouve.ProfilResto = profilResto;
+                bdd.SaveChanges();
+            }
+        }
+
+        public void SupprimerProfil(string identifiant)
+        {
+            Profil profilTrouve = bdd.Profils.FirstOrDefault(profil => profil.Identifiant == identifiant);
+            if (profilTrouve != null)
+            {
+                bdd.Profils.Remove(profilTrouve);
                 bdd.SaveChanges();
             }
         }
